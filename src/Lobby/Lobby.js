@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Modal } from 'react-modal-button';
-import {API_ENDPOINT} from '../config';
 import './Lobby.css';
 const axios = require('axios');
 
@@ -32,7 +31,7 @@ class Lobby extends Component {
   }
 
   APIGetGameList(token) {
-    axios.get(`${API_ENDPOINT}/past_games`, {
+    axios.get(`${process.env.REACT_APP_API_ENDPOINT}/past_games`, {
       headers: {
         'x-btoken': token
       }

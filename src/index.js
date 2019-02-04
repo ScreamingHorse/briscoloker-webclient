@@ -4,12 +4,12 @@ import './index.css';
 import * as serviceWorker from './serviceWorker';
 import Routes from './routes';
 import { BrowserRouter } from 'react-router-dom';
-import {WEBSOCKET_SERVER} from './config';
 import Io from 'socket.io-client';
 
 if (!window.socket) {
   let token = localStorage.getItem('token');
-  window.socket= Io(WEBSOCKET_SERVER, {query: `token=${token}`});
+  //console.log('process.env.REACT_APP_WEBSOCKET_SERVER', process.env.REACT_APP_WEBSOCKET_SERVER)
+  window.socket= Io(process.env.REACT_APP_WEBSOCKET_SERVER, {query: `token=${token}`});
 }
 ReactDOM.render(<BrowserRouter><Routes /></BrowserRouter>, document.getElementById('root'));
 

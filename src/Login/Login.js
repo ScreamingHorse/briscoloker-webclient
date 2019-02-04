@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './Login.css';
-import {API_ENDPOINT, WEBSOCKET_SERVER} from '../config';
 import Io from 'socket.io-client';
 const axios = require('axios');
 
@@ -50,7 +49,7 @@ class Login extends Component {
   }
 
   APILogin(username, password) {
-    axios.post(`${API_ENDPOINT}/login`, {
+    axios.post(`${process.env.REACT_APP_API_ENDPOINT}/login`, {
       username,
       password
     })
@@ -60,7 +59,7 @@ class Login extends Component {
         //I create the socket.io client on window so I can access it everywhere
         //if (!window.socket) {
         let token = localStorage.getItem('token');
-        window.socket= Io(WEBSOCKET_SERVER, {query: `token=${token}`});
+        window.socket= Io(process.env.REACT_APP_WEBSOCKET_SERVER, {query: `token=${token}`});
         //}
         window.socket.on('disconnect', () => {
           console.log("I am disconnected")
@@ -84,7 +83,7 @@ class Login extends Component {
   }
 
   APIRegister(username, password) {
-    axios.post(`${API_ENDPOINT}/register`, {
+    axios.post(`${process.env.REACT_APP_API_ENDPOINT}/register`, {
       username,
       password
     })
