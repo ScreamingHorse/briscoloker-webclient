@@ -83,26 +83,28 @@ class Login extends Component {
   }
 
   APIRegister(username, password) {
-    axios.post(`${process.env.REACT_APP_API_ENDPOINT}/register`, {
-      username,
-      password
-    })
-      .then(result => {
-        localStorage.setItem('token',result.data.token);
-        setInterval(()=> {
-          this.props.history.push('/lobby');
-        },2500);
-        this.setState({
-          isRegistering : false,
-          flashMessage : 'Registration OK, you\'ll be redirected to the lobby soon',
-        })
+    if (process.env.REACT_APP_REGISTRATION === 'on') {
+      axios.post(`${process.env.REACT_APP_API_ENDPOINT}/register`, {
+        username,
+        password
       })
-      .catch(e => {
-        this.setState({
-          isRegistering : false,
-          flashMessage : 'Something went horribly wrong. Try again!',
+        .then(result => {
+          localStorage.setItem('token',result.data.token);
+          setInterval(()=> {
+            this.props.history.push('/lobby');
+          },2500);
+          this.setState({
+            isRegistering : false,
+            flashMessage : 'Registration OK, you\'ll be redirected to the lobby soon',
+          })
         })
-      })
+        .catch(e => {
+          this.setState({
+            isRegistering : false,
+            flashMessage : 'Something went horribly wrong. Try again!',
+          })
+        })
+    }
   }
 
   render() {
@@ -121,7 +123,10 @@ class Login extends Component {
           </div>
           <div className="Login-buttons">
             <button onClick={this.handleLogin}> Login </button>
-            <button onClick={this.handleRegister}> Register instead </button>
+            { (process.env.REACT_APP_REGISTRATION === 'on') ?
+                <button onClick={this.handleRegister}> Register instead </button>
+                : null
+            }
           </div>
         </React.Fragment>
       : null}
