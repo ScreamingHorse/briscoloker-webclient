@@ -9,6 +9,7 @@ class Lobby extends Component {
     super(props);
     this.handlePlay = this.handlePlay.bind(this);
     this.handleGoToTheGame = this.handleGoToTheGame.bind(this);
+    this.handleLogout = this.handleLogout.bind(this)
     this.APIGetGameList = this.APIGetGameList.bind(this);
 
     window.socket.on('match_ready', () => {
@@ -67,6 +68,11 @@ class Lobby extends Component {
     });
   }
 
+  handleLogout() {
+    localStorage.removeItem('token');
+    window.location.assign('/login');
+  }
+
   render() {
     return (
       <div className="Lobby">
@@ -88,6 +94,7 @@ class Lobby extends Component {
           <div className="Lobby-main">
             <div className="Lobby-main__playbutton">
               <button onClick={this.handlePlay} className="playButton" >Play!</button>
+              <button onClick={this.handleLogout} className="playButton" >Logout</button>
             </div>
             <div className="Lobby-main__pastggames">
               Past games:
