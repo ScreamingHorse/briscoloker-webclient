@@ -172,3 +172,16 @@
   display: flex;
   flex-direction: column;
 }
+
+.Game-heroStuff__timer {
+  border: 3px dotted aquamarine;
+  border-radius: 10px;
+  margin: 3px;
+  padding: 5px;
+  color: white;
+  height: 85px;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  font-size: 70px;
+}

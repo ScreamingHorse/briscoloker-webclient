@@ -32,6 +32,7 @@ class Game extends Component {
       isGameFinished : false,
       gameWinner: '',
       logs : [],
+      timeLeft : 15,
       currentHand: {
         roundLeader : '',
         initiative : '',
@@ -94,7 +95,7 @@ class Game extends Component {
         let remoteVillan = data.result.villan;
         let remoteHero = data.result.hero;
         let remoteCurrentHand = data.result.currentHand
-        
+
         villan.name = remoteVillan.name;
         villan.cardsCaptured = remoteVillan.cardsCaptured;
         villan.hand = [];
@@ -146,6 +147,12 @@ class Game extends Component {
           gameState,
         })
       }
+    });
+    //This is the topic the client is listening for the time left
+    window.socket.on('timer', (timeLeft) => {
+      this.setState({
+        timeLeft
+      })
     });
     //Try to reconnect to a game using the auth token
     window.socket.on('connect', () => {
@@ -260,6 +267,9 @@ class Game extends Component {
                 : null }
                 <Link to="/lobby" className="fakeButton">Lobby</Link>
             </div>
+            <div className="Game-heroStuff__timer" style={{backgroundColor: (this.state.timeLeft > 5 ? 'blue' : 'red')}}>
+              {this.state.timeLeft}
+            </div> 
             <div className="Game-middleSection__commonActions___handPot">
                 <div>
                   Bets: <br />
