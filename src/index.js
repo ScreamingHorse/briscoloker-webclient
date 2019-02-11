@@ -10,6 +10,9 @@ if (!window.socket) {
   let token = localStorage.getItem('token');
   //console.log('process.env.REACT_APP_WEBSOCKET_SERVER', process.env.REACT_APP_WEBSOCKET_SERVER)
   window.socket= Io(process.env.REACT_APP_WEBSOCKET_SERVER, {query: `token=${token}`});
+  window.socket.on('disconnect', () => {
+    if (window.location.href !== process.env.REACT_APP_HOMEPAGE) window.location.href = process.env.REACT_APP_HOMEPAGE;
+  });
 }
 ReactDOM.render(<BrowserRouter><Routes /></BrowserRouter>, document.getElementById('root'));
 
