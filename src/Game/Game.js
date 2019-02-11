@@ -11,6 +11,7 @@ class Game extends Component {
     this.playAHeroCard = this.playAHeroCard.bind(this);
     this.heroBetting = this.heroBetting.bind(this);
     this.heroFolding = this.heroFolding.bind(this);
+    this.updateTimer =this.updateTimer.bind(this);
 
     /**
      * Values of the cards 1 -> 10
@@ -32,7 +33,9 @@ class Game extends Component {
       isGameFinished : false,
       gameWinner: '',
       logs : [],
-      timeLeft : 15,
+      timeLeft : 50,
+      timerStart : 0,
+      timer: setInterval(this.updateTimer, 1000),
       currentHand: {
         roundLeader : '',
         initiative : '',
@@ -135,6 +138,7 @@ class Game extends Component {
         let sideBet = data.result.sideBet;
         let gameState = data.result.gameState;
         let logs = data.result.logs;
+        let timerStart = data.result.timer; 
         this.setState({
           logs,
           villan,
@@ -145,15 +149,11 @@ class Game extends Component {
           board,
           sideBet,
           gameState,
+          timerStart,
         })
       }
     });
-    //This is the topic the client is listening for the time left
-    window.socket.on('timer', (timeLeft) => {
-      this.setState({
-        timeLeft
-      })
-    });
+
     //Try to reconnect to a game using the auth token
     window.socket.on('connect', () => {
       //Check if I have a game ready
@@ -166,6 +166,19 @@ class Game extends Component {
         this.props.history.push('/');
       }
     });
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this.state.timer);
+  }
+
+  updateTimer () {
+      //debugger
+      let timeLeft = 50 - parseInt((new Date().getTime() - this.state.timerStart)/1000);
+      //console.log('timeLeft',timeLeft, this.state.timerStart - new Date().getTime());
+      this.setState({
+        timeLeft: timeLeft > 0 ? timeLeft : 0,
+      });
   }
 
   /**
