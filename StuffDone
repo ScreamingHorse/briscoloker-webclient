@@ -98,4 +98,10 @@ Added the interval for the timer, that is now frontend.
 
 Day 20
 
-Fixed several wierd behaviour
+Added the interval as a const
+Changed the disconnect behaviour
+
+Known Bug:
+  - reconnect_me fails after the end of a game
+Potential Issue:
+  - Potential issue when calling and all-in with the exact amount (seems to redirect from /game to /lobby)
