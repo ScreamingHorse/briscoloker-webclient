@@ -4,6 +4,7 @@ import Deck from './Deck/Deck';
 import Board from './Board/Board';
 import CapturedCards from './CapturedCards/CapturedCards';
 import { Link } from "react-router-dom";
+const roundLength = 50;
 class Game extends Component {
 
   constructor(props) {
@@ -33,7 +34,7 @@ class Game extends Component {
       isGameFinished : false,
       gameWinner: '',
       logs : [],
-      timeLeft : 50,
+      timeLeft : roundLength,
       timerStart : 0,
       timer: setInterval(this.updateTimer, 1000),
       currentHand: {
@@ -174,7 +175,7 @@ class Game extends Component {
 
   updateTimer () {
       //debugger
-      let timeLeft = 50 - parseInt((new Date().getTime() - this.state.timerStart)/1000);
+      let timeLeft = roundLength - parseInt((new Date().getTime() - this.state.timerStart)/1000);
       //console.log('timeLeft',timeLeft, this.state.timerStart - new Date().getTime());
       this.setState({
         timeLeft: timeLeft > 0 ? timeLeft : 0,
@@ -301,7 +302,7 @@ class Game extends Component {
                 {this.state.logs
                   .sort((L1,L2) => {
                     if (L1.time > L2.time) return -1
-                      else return 1 
+                      else return 1
                   })
                   .map((L,i) => {
                   return <span key={`log_${i}`}>{new Date(L.time).toLocaleDateString('en-GB',{hour:'2-digit',minute:'2-digit',second:'2-digit'})} - {L.log}</span>

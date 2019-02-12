@@ -1,6 +1,19 @@
 .Login {
   display: flex;
   flex-direction: column;
+  width: 500px;
+  background: antiquewhite;
+  border: 2px solid aquamarine;
+  border-radius: 15px;
+  margin: auto;
+  margin-top: 15px;
+  padding: 15px;
+}
+
+.Login-input {
+  height: 25px;
+  border-radius: 5px;
+  font-size: 18px;
 }
 
 .Login div {
@@ -15,8 +28,7 @@
 
 .Login-buttons {
   display: flex;
-  flex-direction: column;
-  
+  flex-flow: row;
 }
 
 .Login-flashMessage {

@@ -3,6 +3,7 @@ import './Login.css';
 import Io from 'socket.io-client';
 const axios = require('axios');
 
+
 class Login extends Component {
 
   constructor(props) {
@@ -19,6 +20,7 @@ class Login extends Component {
       username : '',
       password : '',
       flashMessage : '',
+      isModalOpen : true,
     };
   }
 
@@ -61,14 +63,11 @@ class Login extends Component {
         let token = localStorage.getItem('token');
         window.socket= Io(process.env.REACT_APP_WEBSOCKET_SERVER, {query: `token=${token}`});
         //}
-        window.socket.on('disconnect', () => {
-          console.log("I am disconnected")
-        });
         setInterval(()=> {
           // not using the router because it creates some problem after the first load
           // this.props.history.push('/lobby');
           window.location.assign('/lobby');
-        },2500);
+        },1500);
         this.setState({
           isLoggingIn : false,
           flashMessage : 'You are logged in, you\'ll be redirected to the lobby soon',
@@ -118,8 +117,8 @@ class Login extends Component {
       {(!this.state.isRegistering && !this.state.isLoggingIn) ? 
         <React.Fragment>
           <div className="Login-inputs">
-            Login : <input type="text" onChange={this.onUsernameChange} value={this.state.username} />
-            Password: <input type="password" onChange={this.onPasswordChange}  value={this.state.password} />
+            Login <input className="Login-input" type="text" onChange={this.onUsernameChange} value={this.state.username} />
+            Password <input className="Login-input" type="password" onChange={this.onPasswordChange}  value={this.state.password} />
           </div>
           <div className="Login-buttons">
             <button onClick={this.handleLogin}> Login </button>

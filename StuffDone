@@ -92,6 +92,10 @@ Day 16
 
 Added the .env for the Websocket server and API endpoint
 
-Day 18
+Day 19
 
 Added the interval for the timer, that is now frontend.
+
+Day 20
+
+Fixed several wierd behaviour
