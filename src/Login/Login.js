@@ -12,8 +12,6 @@ class Login extends Component {
     this.onUsernameChange = this.onUsernameChange.bind(this);
     this.onPasswordChange = this.onPasswordChange.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
-    this.handleRegister = this.handleRegister.bind(this);
-    this.APIRegister = this.APIRegister.bind(this);
     this.APILogin = this.APILogin.bind(this);
 
     this.state = {
@@ -44,10 +42,7 @@ class Login extends Component {
   }
 
   handleRegister(e) {
-    this.setState({
-      isRegistering: true,
-    });
-    this.APIRegister(this.state.username,this.state.password);
+    this.props.history.push('/register');
   }
 
   APILogin(username, password) {
@@ -81,31 +76,6 @@ class Login extends Component {
       })
   }
 
-  APIRegister(username, password) {
-    if (process.env.REACT_APP_REGISTRATION === 'on') {
-      axios.post(`${process.env.REACT_APP_API_ENDPOINT}/register`, {
-        username,
-        password
-      })
-        .then(result => {
-          localStorage.setItem('token',result.data.token);
-          setInterval(()=> {
-            this.props.history.push('/lobby');
-          },2500);
-          this.setState({
-            isRegistering : false,
-            flashMessage : 'Registration OK, you\'ll be redirected to the lobby soon',
-          })
-        })
-        .catch(e => {
-          this.setState({
-            isRegistering : false,
-            flashMessage : 'Something went horribly wrong. Try again!',
-          })
-        })
-    }
-  }
-
   render() {
     return (
       <div className="Login">
@@ -117,7 +87,7 @@ class Login extends Component {
       {(!this.state.isRegistering && !this.state.isLoggingIn) ? 
         <React.Fragment>
           <div className="Login-inputs">
-            Login <input className="Login-input" type="text" onChange={this.onUsernameChange} value={this.state.username} />
+            Username or email  <input className="Login-input" type="text" onChange={this.onUsernameChange} value={this.state.username} />
             Password <input className="Login-input" type="password" onChange={this.onPasswordChange}  value={this.state.password} />
           </div>
           <div className="Login-buttons">

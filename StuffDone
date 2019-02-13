@@ -105,3 +105,8 @@ Known Bug:
   - reconnect_me fails after the end of a game
 Potential Issue:
   - Potential issue when calling and all-in with the exact amount (seems to redirect from /game to /lobby)
+
+Day 21
+
+Add route for register
+Add creation date and lastLogin date to the userObject in Mongo

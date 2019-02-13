@@ -1,0 +1,41 @@
+.Register {
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  background: antiquewhite;
+  border: 2px solid aquamarine;
+  border-radius: 15px;
+  margin: auto;
+  margin-top: 15px;
+  padding: 15px;
+}
+
+.Register-input {
+  height: 25px;
+  border-radius: 5px;
+  font-size: 18px;
+}
+
+.Register div {
+  height: 35px;
+}
+
+.Register-inputs {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Register-buttons {
+  display: flex;
+  flex-flow: row;
+}
+
+.Register-flashMessage {
+  border: 2px solid red;
+  background-color: brown;
+  border-radius: 20px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
