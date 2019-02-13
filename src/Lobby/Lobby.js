@@ -11,6 +11,7 @@ class Lobby extends Component {
     this.handleGoToTheGame = this.handleGoToTheGame.bind(this);
     this.handleLogout = this.handleLogout.bind(this)
     this.APIGetGameList = this.APIGetGameList.bind(this);
+    this.handleStopLookingForAGame = this.handleStopLookingForAGame.bind(this);
 
     window.socket.on('match_ready', () => {
       clearInterval(this.searchTimer);
@@ -73,6 +74,14 @@ class Lobby extends Component {
     window.location.assign('/login');
   }
 
+  handleStopLookingForAGame() {
+    clearInterval(this.searchTimer);
+    window.socket.emit('stop_looking',{token : this.state.token});
+    this.setState({
+      isSearching : false,
+    });
+  }
+
   render() {
     let wins = 0;
     let losses = 0;
@@ -84,8 +93,9 @@ class Lobby extends Component {
       <div className="Lobby">
       {this.state.isSearching ?
         <Modal isOpen={true}>
-          Looking for a game, please be patient while we are looking for an oppenent.
-          Searching for {this.state.searchTime} seconds
+          Looking for a game, please be patient while we are looking for an opponent.
+          Searching for {this.state.searchTime} seconds.
+          <button onClick={this.handleStopLookingForAGame}> Stop Looking</button>
         </Modal>
       : null
       }
