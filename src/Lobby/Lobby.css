@@ -15,6 +15,10 @@
   margin-left: 10px;
   font-size: 25px;
   margin-top: 10px;
+  background-color: lightsteelblue;
+  background: 2px solid aquamarine;
+  border-radius: 15px;
+  padding: 15px;
 }
 
 .Lobby-main__pastggames ul {
@@ -27,7 +31,25 @@
   font-size: 18px;
 }
 
+.Lobby-main__pastggames li.winner {
+  background-color: green;
+}
+
+.Lobby-main__pastggames li.loser {
+  background-color: red;
+}
+
 .Lobby-main__playbutton {
   display: flex;
   flex-direction: column;
+}
+
+.Lobby-main__pastggames___stats {
+  font-size: 14px;
+}
+
+.Lobby-main__pastggames___list {
+  height: 300px;
+  overflow-y: auto;
+  overflow-x: hidden;
 }

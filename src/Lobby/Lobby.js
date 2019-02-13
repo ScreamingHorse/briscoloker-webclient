@@ -74,6 +74,12 @@ class Lobby extends Component {
   }
 
   render() {
+    let wins = 0;
+    let losses = 0;
+    this.state.pastGames.forEach((G) => {
+      if (Boolean(G.didIwin)) wins++;
+        else losses++;
+    })
     return (
       <div className="Lobby">
       {this.state.isSearching ?
@@ -98,13 +104,18 @@ class Lobby extends Component {
             </div>
             <div className="Lobby-main__pastggames">
               Past games:
-              <ul>
-                {
-                  this.state.pastGames.map((G,k) => {
-                    return <li key={`k${k}`}>{G.id}, {G.played}, {G.winner} </li>
-                  })
-                }
-              </ul>
+              <div className="Lobby-main__pastggames___list">
+                <ul>
+                  {
+                    this.state.pastGames.map((G,k) => {
+                      return <li key={`k${k}`} className={Boolean(G.didIwin)?"winner":"loser"}>{G.played}, {G.winner} </li>
+                    })
+                  }
+                </ul>
+              </div>
+              <div className="Lobby-main__pastggames___stats">
+                Total wins: {wins}  ({parseInt(wins*100/(wins+losses),10)}%) Losses: {losses}
+              </div>
             </div>
           </div>
         </React.Fragment>
