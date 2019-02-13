@@ -110,3 +110,4 @@ Day 21
 
 Add route for register
 Add creation date and lastLogin date to the userObject in Mongo
+Added button to stop search
