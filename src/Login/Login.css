@@ -1,7 +1,7 @@
 .Login {
   display: flex;
   flex-direction: column;
-  width: 500px;
+  width: 350px;
   background: antiquewhite;
   border: 2px solid aquamarine;
   border-radius: 15px;
@@ -16,19 +16,25 @@
   font-size: 18px;
 }
 
-.Login div {
-  height: 35px;
-}
+
 
 .Login-inputs {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
+  flex-direction: column;
 }
 
 .Login-buttons {
   display: flex;
-  flex-flow: row;
+  align-items: center;
+  justify-items: center;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+.Login-buttons button {
+  height: 25px;
 }
 
 .Login-flashMessage {

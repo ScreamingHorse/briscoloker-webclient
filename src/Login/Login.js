@@ -88,8 +88,12 @@ class Login extends Component {
       {(!this.state.isRegistering && !this.state.isLoggingIn) ? 
         <React.Fragment>
           <div className="Login-inputs">
-            Username or email  <input className="Login-input" type="text" onChange={this.onUsernameChange} value={this.state.username} />
-            Password <input className="Login-input" type="password" onChange={this.onPasswordChange}  value={this.state.password} />
+            <div className="Login-inputs__buttonContainer">
+              Username or email  <input className="Login-input" type="text" onChange={this.onUsernameChange} value={this.state.username} />
+            </div>
+            <div className="Login-inputs__buttonContainer">
+              Password <input className="Login-input" type="password" onChange={this.onPasswordChange}  value={this.state.password} />
+            </div>
           </div>
           <div className="Login-buttons">
             <button onClick={this.handleLogin}> Login </button>

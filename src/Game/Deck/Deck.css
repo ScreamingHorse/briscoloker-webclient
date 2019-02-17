@@ -6,7 +6,9 @@
   border-radius: 10px;
   border: 1px solid;
   transform: rotate(90deg);
-  background-size: 100%;
+  background-size: 104%;
+  background-position-y: -2px;
+  background-position-x: -2px;
 }
 
 .Deck-ActualDeck__p {
