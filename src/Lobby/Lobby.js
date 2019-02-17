@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Modal } from 'react-modal-button';
 import './Lobby.css';
 const axios = require('axios');
+const moment = require('moment');
 
 class Lobby extends Component {
 
@@ -10,7 +11,7 @@ class Lobby extends Component {
     this.handlePlay = this.handlePlay.bind(this);
     this.handleGoToTheGame = this.handleGoToTheGame.bind(this);
     this.handleLogout = this.handleLogout.bind(this)
-    this.APIGetGameList = this.APIGetGameList.bind(this);
+    this.APIGetUserData = this.APIGetUserData.bind(this);
     this.handleStopLookingForAGame = this.handleStopLookingForAGame.bind(this);
 
     window.socket.on('match_ready', () => {
@@ -23,25 +24,27 @@ class Lobby extends Component {
         this.handleGoToTheGame();
       }, 2000)
     });
-    this.APIGetGameList(localStorage.getItem('token'));
+    this.APIGetUserData(localStorage.getItem('token'));
     this.state = {
       isSearching: false,
       searchTime: 0,
       token: localStorage.getItem('token'),
       pastGames: [],
+      userInfo: {},
     };
   }
 
-  APIGetGameList(token) {
-    axios.get(`${process.env.REACT_APP_API_ENDPOINT}/past_games`, {
+  APIGetUserData(token) {
+    axios.get(`${process.env.REACT_APP_API_ENDPOINT}/user_data`, {
       headers: {
         'x-btoken': token
       }
     })
       .then(result => {
-        //debugger
+        // debugger
         this.setState({
-          pastGames : result.data.games,
+          pastGames : result.data.userInfo.games,
+          userInfo : result.data.userInfo.userInfo,
         })
       })
       .catch(e => {
@@ -83,12 +86,6 @@ class Lobby extends Component {
   }
 
   render() {
-    let wins = 0;
-    let losses = 0;
-    this.state.pastGames.forEach((G) => {
-      if (Boolean(G.didIwin)) wins++;
-        else losses++;
-    })
     return (
       <div className="Lobby">
       {this.state.isSearching ?
@@ -118,14 +115,26 @@ class Lobby extends Component {
                 <ul>
                   {
                     this.state.pastGames.map((G,k) => {
-                      return <li key={`k${k}`} className={Boolean(G.didIwin)?"winner":"loser"}>{G.played}, {G.winner} </li>
+                      return <li key={`k${k}`} 
+                        className={Boolean(G.didIwin)?"winner":"loser"}>
+                          {moment(G.played).format('MMMM Do YYYY, h:mm a')}, 
+                          {G.winner}
+                        </li>
                     })
                   }
                 </ul>
               </div>
               <div className="Lobby-main__pastggames___stats">
-                Total wins: {wins}  ({parseInt(wins*100/(wins+losses),10)}%) Losses: {losses}
+                Total wins: {this.state.userInfo.wins}  ({parseInt(this.state.userInfo.wins*100/(this.state.userInfo.wins+this.state.userInfo.losses),10)}%) Losses: {this.state.userInfo.losses}
               </div>
+            </div>
+            <div className="Lobby-main__userInfo">
+              Welcome back, {this.state.userInfo.username}
+              <br />
+              Your rating is: {this.state.userInfo.rating}
+              <br />
+              Last login: {moment(this.state.userInfo.lastLogin).format('MMMM Do YYYY, h:mm:ss a')}
+              <br />
             </div>
           </div>
         </React.Fragment>

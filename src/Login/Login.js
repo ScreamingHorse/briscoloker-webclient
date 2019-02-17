@@ -12,6 +12,7 @@ class Login extends Component {
     this.onUsernameChange = this.onUsernameChange.bind(this);
     this.onPasswordChange = this.onPasswordChange.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
+    this.handleRegister = this.handleRegister.bind(this);
     this.APILogin = this.APILogin.bind(this);
 
     this.state = {

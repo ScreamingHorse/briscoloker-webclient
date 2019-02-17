@@ -11,6 +11,16 @@
   display: flex
 }
 
+.Lobby-main__userInfo {
+  margin-left: 10px;
+  font-size: 15px;
+  margin-top: 10px;
+  background-color: lightsteelblue;
+  background: 2px solid aquamarine;
+  border-radius: 15px;
+  padding: 15px;
+}
+
 .Lobby-main__pastggames {
   margin-left: 10px;
   font-size: 25px;
