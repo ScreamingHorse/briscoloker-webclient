@@ -106,11 +106,26 @@ class Lobby extends Component {
       {!this.state.isSearching && !this.state.isRoomReady ?
         <React.Fragment>
           <div className="Lobby-main">
+            <div className="Lobby-main__userInfo">
+              <div className="Lobby-main__pastggames___stats">
+                Welcome back, {this.state.userInfo.username}
+              </div>
+              <div className="Lobby-main__pastggames___stats">
+                Your rating is: {this.state.userInfo.rating}
+              </div>
+              <div className="Lobby-main__pastggames___stats">
+                Games played: {this.state.userInfo.wins + this.state.userInfo.losses}, {this.state.userInfo.wins || 0} wins ({parseInt(this.state.userInfo.wins*100/(this.state.userInfo.wins+this.state.userInfo.losses),10)}%)
+              </div>
+              <div className="Lobby-main__pastggames___stats" style={{fontSize:"14px"}}>
+                Last login: {moment(this.state.userInfo.lastLogin).format('MMMM Do YYYY, h:mm:ss a')}
+              </div>
+            </div>
             <div className="Lobby-main__playbutton">
               <button onClick={this.handlePlay} className="playButton" >Play!</button>
               <button onClick={this.handleLogout} className="playButton" >Logout</button>
             </div>
-            <div className="Lobby-main__pastggames">
+          </div>
+          <div className="Lobby-main__pastggames">
               Past games:
               <div className="Lobby-main__pastggames___list">
                 <ul>
@@ -125,19 +140,7 @@ class Lobby extends Component {
                   }
                 </ul>
               </div>
-              <div className="Lobby-main__pastggames___stats">
-                Total wins: {this.state.userInfo.wins}  ({parseInt(this.state.userInfo.wins*100/(this.state.userInfo.wins+this.state.userInfo.losses),10)}%) Losses: {this.state.userInfo.losses}
-              </div>
             </div>
-            <div className="Lobby-main__userInfo">
-              Welcome back, {this.state.userInfo.username}
-              <br />
-              Your rating is: {this.state.userInfo.rating}
-              <br />
-              Last login: {moment(this.state.userInfo.lastLogin).format('MMMM Do YYYY, h:mm:ss a')}
-              <br />
-            </div>
-          </div>
         </React.Fragment>
          : null
       }

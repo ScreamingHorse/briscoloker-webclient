@@ -40,16 +40,25 @@ class Card extends Component {
     return <React.Fragment>{suitName}</React.Fragment>
   }
 
+  handleCardClick() {
+    if (this.props.onPlay) {
+      this.props.onPlay(this.props.value, this.props.suit)
+    }
+  }
+
   /**
   backgroundPositionY : -1 - 100 * parseInt(this.props.suit),
   backgroundPositionX : - 62 * (parseInt(this.props.value) - 1),
    */
   render() {
-    const buttonText = this.props.buttonText ? this.props.buttonText : 'Play me!';
+    const buttonText = this.props.buttonText ? this.props.buttonText : 'Play!';
     return (
-      <div className={`Card Card-background__${this.props.suit}-${this.props.value}`}>
+      <div className={`Card Card-background__${this.props.suit}-${this.props.value}`} onClick={this.handleCardClick.bind(this)} >
         {this.props.onPlay ?
-          <button onClick={() => {this.props.onPlay(this.props.value, this.props.suit)}}>{buttonText}</button>
+          <React.Fragment>
+            <div className="Card-cardOverlay"></div>
+            <p className="Card-cardoverlay__action">{buttonText}</p>
+          </React.Fragment>
           : null
         }
       </div>

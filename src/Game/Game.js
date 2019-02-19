@@ -236,6 +236,9 @@ class Game extends Component {
       <div className="Game">
         <section className="Game-Board">
           <div className="Game-middleSection">
+            <div className="Game-heroStuff__timer" style={{color: (this.state.timeLeft > 5 ? 'white' : 'red')}}>
+              {this.state.timeLeft}
+            </div> 
             <Deck 
               trumpCard = {this.state.trumpCard}
               deck = {this.state.deck}
@@ -281,9 +284,6 @@ class Game extends Component {
                 : null }
                 <Link to="/lobby" className="fakeButton">Lobby</Link>
             </div>
-            <div className="Game-heroStuff__timer" style={{backgroundColor: (this.state.timeLeft > 5 ? 'blue' : 'red')}}>
-              {this.state.timeLeft}
-            </div> 
             <div className="Game-middleSection__commonActions___handPot">
                 <div>
                   Bets: <br />

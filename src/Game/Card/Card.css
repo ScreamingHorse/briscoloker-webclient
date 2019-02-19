@@ -8,6 +8,31 @@
   border: solid 1px;
 }
 
+.Card-cardOverlay {
+  border: solid 1px;
+  border-radius: 10px;
+  background-color: grey;
+  height: 100%;
+  opacity: .3;
+  cursor: pointer;
+}
+
+.Card-cardOverlay:hover {
+  opacity: .8;
+}
+
+.Card-cardoverlay__action {
+  opacity: .8;
+  color: red;
+  font-weight: bold;
+  transform: rotate(-45deg);
+  cursor: pointer;
+  margin-top: -60px;
+}
+
+.Card button {
+  margin-top: 100px;
+}
 .Card-background__0-1 {
   background-position-y: 0;
   background-position-x: 0;

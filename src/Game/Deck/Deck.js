@@ -17,7 +17,7 @@ class Deck extends Component {
         {this.props.isTheRoundFinished ? null :
           <React.Fragment>
             <div className="Deck-gameRound">
-            Round {this.props.gameRound}
+              Round {this.props.gameRound}
             </div>
             <div className="Deck-ActualDeck">
               <p className="Deck-ActualDeck__p">Card left {this.props.cardLeft} </p>

@@ -1,9 +1,5 @@
 .Board {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-left: 100px;
-  flex-direction: column;
+
 }
 
 .Board-villanHand {
@@ -22,6 +18,7 @@
   display: flex;
   height: 150px;
   align-items: center;
+  justify-content: center;
 }
 
 .Board-endGameCard {

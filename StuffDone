@@ -116,3 +116,6 @@ Day 22
 Renamed route from past_game to user_info
 The wins and losses are from the server now
 Fixed cards background
+
+Day 23
+Improved the UI

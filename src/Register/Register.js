@@ -12,6 +12,7 @@ class Register extends Component {
     this.onEmailChange = this.onEmailChange.bind(this);
     this.onTacChange = this.onTacChange.bind(this);
     this.handleRegister = this.handleRegister.bind(this);
+    this.handleBack = this.handleBack.bind(this);
     this.APIRegister = this.APIRegister.bind(this);
 
     this.state = {
@@ -46,6 +47,10 @@ class Register extends Component {
     this.setState({
       password : e.currentTarget.value
     })
+  }
+
+  handleBack(e) {
+    this.props.history.push('/login');
   }
 
   handleRegister(e) {
@@ -109,23 +114,26 @@ class Register extends Component {
       :null}
       {(!this.state.isRegistering && !this.state.isLoggingIn) ? 
         <React.Fragment>
-          <div className="Register-inputs">
-            Username <input className="Register-input" type="text" onChange={this.onUsernameChange} value={this.state.username} />
-          </div>
-          <div className="Register-inputs">
-            Email <input className="Register-input" type="text" onChange={this.onEmailChange} value={this.state.email} />
-          </div>
-          <div className="Register-inputs">
-            Password <input className="Register-input" type="password" onChange={this.onPasswordChange}  value={this.state.password} />
-          </div>
-          <div className="Register-inputs">
-            T&C <input className="Register-input" type="checkbox" onChange={this.onTacChange} value={this.state.tac} />
+          <div className="Register-inputContainer">
+            <div className="Register-inputs">
+              <input className="Register-input" placeholder="Username" type="text" onChange={this.onUsernameChange} value={this.state.username} />
+            </div>
+            <div className="Register-inputs">
+              <input className="Register-input" placeholder="Email" type="text" onChange={this.onEmailChange} value={this.state.email} />
+            </div>
+            <div className="Register-inputs">
+              <input className="Register-input" placeholder="Password" type="password" onChange={this.onPasswordChange}  value={this.state.password} />
+            </div>
+            <div className="Register-inputs">
+              T&C <input className="Register-input" type="checkbox" onChange={this.onTacChange} value={this.state.tac} />
+            </div>
           </div>
           <div className="Register-buttons">
             { (process.env.REACT_APP_REGISTRATION === 'on') ?
-                <button onClick={this.handleRegister}> Sign up </button>
+                <button className="Register-button" onClick={this.handleRegister}> Sign up </button>
                 : null
             }
+            <button className="Register-button" onClick={this.handleBack}> Back </button>
           </div>
         </React.Fragment>
       : null}

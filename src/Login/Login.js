@@ -89,10 +89,10 @@ class Login extends Component {
         <React.Fragment>
           <div className="Login-inputs">
             <div className="Login-inputs__buttonContainer">
-              Username or email  <input className="Login-input" type="text" onChange={this.onUsernameChange} value={this.state.username} />
+              <input className="Login-input" type="text" placeholder="Username or email" onChange={this.onUsernameChange} value={this.state.username} />
             </div>
             <div className="Login-inputs__buttonContainer">
-              Password <input className="Login-input" type="password" onChange={this.onPasswordChange}  value={this.state.password} />
+              <input className="Login-input" type="password" placeholder="Password" onChange={this.onPasswordChange}  value={this.state.password} />
             </div>
           </div>
           <div className="Login-buttons">

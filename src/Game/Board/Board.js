@@ -31,6 +31,9 @@ class Board extends Component {
       villanCards.push(true);
     }
     return <React.Fragment>
+    <div className="Game-middleSection__villanStats">
+      {this.props.villan.name} : {this.props.villan.chips}
+    </div>
     <div className="Game-heroHand">
       {
         villanCards.map((t,idx) => {
@@ -59,11 +62,14 @@ class Board extends Component {
               key={`hero-h-${i}`}
               value={C.value}
               suit={C.suit}
-              buttonText={this.props.isFolded?`Discard me`:`Play me!`}
+              buttonText={this.props.isFolded?`Discard`:`Play`}
               onPlay={this.props.isMyCardInitiative?this.props.playAHeroCard:null}
             />
           })
         }
+      </div>
+      <div className="Game-heroStuff__heroStats">
+        {this.props.hero.name} : {this.props.hero.chips}
       </div>
     </React.Fragment>
   }
