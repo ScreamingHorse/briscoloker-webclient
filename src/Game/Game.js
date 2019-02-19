@@ -3,16 +3,16 @@ import './Game.css';
 import Deck from './Deck/Deck';
 import Board from './Board/Board';
 import CapturedCards from './CapturedCards/CapturedCards';
-import { Link } from "react-router-dom";
 const roundLength = 50;
 class Game extends Component {
 
   constructor(props) {
     super(props);
-    this.playAHeroCard = this.playAHeroCard.bind(this);
-    this.heroBetting = this.heroBetting.bind(this);
-    this.heroFolding = this.heroFolding.bind(this);
-    this.updateTimer =this.updateTimer.bind(this);
+    this.playAHeroCard= this.playAHeroCard.bind(this);
+    this.heroBetting= this.heroBetting.bind(this);
+    this.heroFolding= this.heroFolding.bind(this);
+    this.updateTimer= this.updateTimer.bind(this);
+    this.handleClickLobby= this.handleClickLobby.bind(this);
 
     /**
      * Values of the cards 1 -> 10
@@ -230,6 +230,10 @@ class Game extends Component {
     return (this.state.board.playedCards[player]===null && this.state.currentHand.initiative === player && !this.state.currentHand.isBettingPhase)
   }
 
+  handleClickLobby() {
+    this.props.history.push('/lobby');
+  }
+
   render() {
     const heroBettingDifference = this.state.currentHand.villanBets - this.state.currentHand.heroBets;
     return (
@@ -282,7 +286,7 @@ class Game extends Component {
                     <button onClick={() => {this.heroFolding()}} style={{marginBottom:"5px"}}>Fold</button>
                   </React.Fragment>
                 : null }
-                <Link to="/lobby" className="fakeButton">Lobby</Link>
+                <button onClick={this.handleClickLobby} href="/lobby" className="fakeButton">Lobby</button>
             </div>
             <div className="Game-middleSection__commonActions___handPot">
                 <div>
