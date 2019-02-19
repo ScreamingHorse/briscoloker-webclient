@@ -149,6 +149,7 @@ class Lobby extends Component {
                         className={Boolean(G.didIwin)?"winner":"loser"}>
                           {moment(G.played).format('MMMM Do YYYY, h:mm a')}, 
                           {G.winner}
+                          {G.gameType === 'ranked' ? `(Ranked ${G.ratingChange})` : ''}
                         </li>
                     })
                   }
