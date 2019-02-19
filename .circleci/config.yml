@@ -41,4 +41,4 @@ jobs:
       - run: sudo pip install awscli --upgrade
       - run: aws --version
       - run: aws s3 ls
-      - run: yarn run deploy
+      - run: yarn build && aws s3 sync build/ s3://${BRISCOLOKER_S3_BUCKET} --delete
