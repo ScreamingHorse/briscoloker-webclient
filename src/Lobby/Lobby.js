@@ -9,7 +9,9 @@ class Lobby extends Component {
 
   constructor(props) {
     super(props);
+    this.joinLobby = this.joinLobby.bind(this);
     this.handlePlay = this.handlePlay.bind(this);
+    this.handlePlayRanked = this.handlePlayRanked.bind(this);
     this.handleGoToTheGame = this.handleGoToTheGame.bind(this);
     this.handleLogout = this.handleLogout.bind(this)
     this.APIGetUserData = this.APIGetUserData.bind(this);
@@ -57,10 +59,13 @@ class Lobby extends Component {
     this.props.history.push('/game');
   }
 
-  handlePlay() {
+  joinLobby(lobbyType) {
     //when a player clicks play, it create a new room or it will join an avaialble room
     // 1. Tell the server you are looking for a game
-    window.socket.emit('join_lobby',{token : this.state.token});
+    window.socket.emit('join_lobby',{
+      token : this.state.token, 
+      lobby: lobbyType
+    });
     // 2. wait for someone to join
     this.searchTimer = setInterval(() => {
       this.setState({
@@ -71,6 +76,14 @@ class Lobby extends Component {
       isSearching : true,
       searchTime: 0,
     });
+  }
+
+  handlePlayRanked() {
+    this.joinLobby('ranked')
+  }
+
+  handlePlay() {
+    this.joinLobby('normal')
   }
 
   handleLogout() {
@@ -121,7 +134,8 @@ class Lobby extends Component {
               </div>
             </div>
             <div className="Lobby-main__playbutton">
-              <button onClick={this.handlePlay} className="playButton" >Play!</button>
+              <button onClick={this.handlePlayRanked} className="playButton" >Play ranked game</button>
+              <button onClick={this.handlePlay} className="playButton" >Play normal game</button>
               <button onClick={this.handleLogout} className="playButton" >Logout</button>
             </div>
           </div>
