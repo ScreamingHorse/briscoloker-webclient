@@ -26,6 +26,23 @@ class Board extends Component {
   }
 
   theBoard = () => {
+    let chatMessage = this.props.chatMessage;
+    switch (this.props.chatMessage) {
+      case 'wp':
+        chatMessage = 'Well played';
+      break;
+      case 'gg':
+        chatMessage = 'Good Game';
+      break;
+      case 'ez':
+        chatMessage = 'This game was too easy!';
+      break;
+      case 'hello':
+        chatMessage = 'It\'s my pleasure to compete against you m\'lady'; 
+      break;
+      default:
+        chatMessage = this.props.chatMessage;
+    }
     let villanCards = [];
     for (var idx = 0; idx < this.props.villanCardsInHand; idx ++) {
       villanCards.push(true);
@@ -34,6 +51,7 @@ class Board extends Component {
     <div className="Game-middleSection__villanStats">
       {this.props.villan.name} : {this.props.villan.chips}
     </div>
+    {chatMessage!==null ? <div className="Board-chatBubble">Says {chatMessage}</div> : null }
     <div className="Game-heroHand">
       {
         villanCards.map((t,idx) => {
@@ -70,6 +88,12 @@ class Board extends Component {
       </div>
       <div className="Game-heroStuff__heroStats">
         {this.props.hero.name} : {this.props.hero.chips}
+        <div className="Game-chatButtons">
+          <button onClick={e => {this.props.sendChatMessage('hello')}}>Hello</button>
+          <button onClick={e => {this.props.sendChatMessage('wp')}}>Well Played</button>
+          <button onClick={e => {this.props.sendChatMessage('gg')}}>Good Game</button>
+          <button onClick={e => {this.props.sendChatMessage('ez')}}>Easy nooob!</button>
+        </div>
       </div>
     </React.Fragment>
   }

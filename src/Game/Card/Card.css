@@ -23,11 +23,11 @@
 
 .Card-cardoverlay__action {
   opacity: .8;
-  color: red;
-  font-weight: bold;
-  transform: rotate(-45deg);
-  cursor: pointer;
-  margin-top: -60px;
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: -90px;
+    background-color: wheat;
 }
 
 .Card button {

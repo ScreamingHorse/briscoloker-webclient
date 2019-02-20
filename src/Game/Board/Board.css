@@ -2,6 +2,12 @@
 
 }
 
+.Game-middleSection__chatBubble {
+  background-image: url("Speech_bubble.svg");
+  height: 99px;
+  width: 65px;
+}
+
 .Board-villanHand {
   background-image: url("carte-romagnole-back-crop.jpg");
   background-color: brown;
@@ -16,7 +22,7 @@
 
 .Board-playedCards {
   display: flex;
-  height: 150px;
+  height: 130px;
   align-items: center;
   justify-content: center;
 }
@@ -34,4 +40,16 @@
   background-color: #339933;
   padding: 20px;
   border-radius: 25px;
+}
+
+.Board-chatBubble {
+  position: absolute;
+  left: 450px;
+  width: 150px;
+  background-color: white;
+  border: 5px solid;
+  border-radius: 55px;
+  padding: 10px;
+  opacity: .7;
+  top: 41px;
 }

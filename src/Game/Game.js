@@ -12,6 +12,7 @@ class Game extends Component {
     this.heroBetting= this.heroBetting.bind(this);
     this.heroFolding= this.heroFolding.bind(this);
     this.updateTimer= this.updateTimer.bind(this);
+    this.sendChatMessage= this.sendChatMessage.bind(this);
     this.handleClickLobby= this.handleClickLobby.bind(this);
 
     /**
@@ -75,10 +76,28 @@ class Game extends Component {
         discardedCards : [],
       },
       gameState: {},
+      chatMessage: null,
     };
     //Tell the socket server that the game UI is ready
     window.socket.emit('table_ready',{ token });
     //All the topic we are listeing
+    //topic for the chat
+    window.socket.on('chat',(data) => {
+      // checking if the sender is not myself
+      if (data.token !== token) {
+        console.log("New chat message!", data);
+        setTimeout(() => {
+          this.setState({
+            chatMessage : null,
+          })
+        }, 2500);
+        // debugger
+        this.setState({
+          chatMessage : data.message
+        })
+      }
+
+    });
     //This topic is used to receive the state of the game from the server
     window.socket.on('game_state',(data) => {
       //debugger
@@ -234,6 +253,10 @@ class Game extends Component {
     this.props.history.push('/lobby');
   }
 
+  sendChatMessage(message) {
+    window.socket.emit('chat',{ token: localStorage.getItem('token'), message: message });
+  }
+
   render() {
     const heroBettingDifference = this.state.currentHand.villanBets - this.state.currentHand.heroBets;
     return (
@@ -264,6 +287,8 @@ class Game extends Component {
               winnerOfTheWholeThing = {this.state.gameState.winnerOfTheWholeThing}
               villan = {this.state.villan}
               hero = {this.state.hero}
+              sendChatMessage = {this.sendChatMessage}
+              chatMessage= {this.state.chatMessage}
             />
             <CapturedCards
               villan = {this.state.villan}
